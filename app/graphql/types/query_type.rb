@@ -21,6 +21,8 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
     field :items, resolver: Resolvers::GetItems
+    field :item, resolver: Resolvers::GetItem
+    field :item_part, resolver: Resolvers::GetItemPart
     field :item_parts, resolver: Resolvers::GetItemParts
   end
 end

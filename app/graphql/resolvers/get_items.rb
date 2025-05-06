@@ -6,5 +6,5 @@ module Resolvers
         Item.all
       end
     end
-  end
+end
   
