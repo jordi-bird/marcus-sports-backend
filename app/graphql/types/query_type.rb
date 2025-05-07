@@ -24,5 +24,7 @@ module Types
     field :item, resolver: Resolvers::GetItem
     field :item_part, resolver: Resolvers::GetItemPart
     field :item_parts, resolver: Resolvers::GetItemParts
+    field :incompatibility_rules, resolver: Resolvers::GetIncompatibilityRules
+    field :incompatibility_rule, resolver: Resolvers::GetIncompatibilityRule
   end
 end

@@ -10,14 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_06_143740) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_07_131925) do
+  create_table "incompatibility_rules", force: :cascade do |t|
+    t.integer "attribute_a_id", null: false
+    t.integer "attribute_b_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["attribute_a_id"], name: "index_incompatibility_rules_on_attribute_a_id"
+    t.index ["attribute_b_id"], name: "index_incompatibility_rules_on_attribute_b_id"
+  end
+
   create_table "item_parts", force: :cascade do |t|
     t.string "name"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "item_id", null: false
+    t.integer "parent_id"
     t.index ["item_id"], name: "index_item_parts_on_item_id"
+    t.index ["parent_id"], name: "index_item_parts_on_parent_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -37,6 +48,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_06_143740) do
     t.index ["item_part_id"], name: "index_part_attributes_on_item_part_id"
   end
 
+  add_foreign_key "incompatibility_rules", "part_attributes", column: "attribute_a_id"
+  add_foreign_key "incompatibility_rules", "part_attributes", column: "attribute_b_id"
+  add_foreign_key "item_parts", "item_parts", column: "parent_id"
   add_foreign_key "item_parts", "items"
   add_foreign_key "part_attributes", "item_parts"
 end
