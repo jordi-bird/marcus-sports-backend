@@ -5,12 +5,14 @@
 
 # Read more: https://github.com/cyu/rack-cors
 
-# Rails.application.config.middleware.insert_before 0, Rack::Cors do
-#   allow do
-#     origins "example.com"
-#
-#     resource "*",
-#       headers: :any,
-#       methods: [:get, :post, :put, :patch, :delete, :options, :head]
-#   end
-# end
+# config/initializers/cors.rb
+Rails.application.config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins 'http://localhost:5173' # o el port del teu frontend
+  
+      resource '*',
+        headers: :any,
+        methods: [:get, :post, :options],
+        credentials: false
+    end
+  end
