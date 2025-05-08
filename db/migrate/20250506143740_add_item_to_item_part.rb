@@ -1,5 +1,0 @@
-class AddItemToItemPart < ActiveRecord::Migration[8.0]
-  def change
-    add_reference :item_parts, :item, null: false, foreign_key: true
-  end
-end
