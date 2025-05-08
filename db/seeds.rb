@@ -17,7 +17,7 @@ chain = bike.item_parts.create!(name: "Chain")
 
 # Afegeix atributs
 full_suspension = frame.part_attributes.create!(name: "Full Suspension", price: 130)
-diamond = frame.part_attributes.create!(name: "Diamond", price: 950)
+diamond = frame.part_attributes.create!(name: "Diamond", price: 95)
 step_through = frame.part_attributes.create!(name: "Step Through", price: 112)
 
 
@@ -43,4 +43,27 @@ IncompatibilityRule.create!(
 IncompatibilityRule.create!(
   attribute_a: fat_bike_wheels,
   attribute_b: rim_color_red
+)
+
+# Regla de preu: "Matte Frame Finish" afegeix 10% al preu de "Full Suspension"
+PriceRule.create!(
+  part_attribute: full_suspension,
+  dependency_part_attribute: matte_frame_finish,
+  operator: 'multiply',
+  price_adjustment: 1.10
+)
+
+# Regla de preu: "Red Rim Color" afegeix 5 al preu de "Mountain Wheels"
+PriceRule.create!(
+  part_attribute: mountain_wheels,
+  dependency_part_attribute: rim_color_red,
+  operator: 'add',
+  price_adjustment: 5
+)
+# Regla de preu: "Mountain Wheels" afegeix 10% al preu de "8-Speed Chain"
+PriceRule.create!(
+  part_attribute: mountain_wheels,
+  dependency_part_attribute: s8_chain,
+  operator: 'multiply',
+  price_adjustment: 1.40
 )

@@ -26,5 +26,6 @@ module Types
     field :item_parts, resolver: Resolvers::GetItemParts
     field :incompatibility_rules, resolver: Resolvers::GetIncompatibilityRules
     field :incompatibility_rule, resolver: Resolvers::GetIncompatibilityRule
+    field :price_rules, [Types::PriceRuleType], resolver: Resolvers::PriceRules
   end
 end

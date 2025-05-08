@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_07_131925) do
+ActiveRecord::Schema[8.0].define(version: 2025_05_07_153830) do
   create_table "incompatibility_rules", force: :cascade do |t|
     t.integer "attribute_a_id", null: false
     t.integer "attribute_b_id", null: false
@@ -48,9 +48,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_07_131925) do
     t.index ["item_part_id"], name: "index_part_attributes_on_item_part_id"
   end
 
+  create_table "price_rules", force: :cascade do |t|
+    t.integer "part_attribute_id", null: false
+    t.integer "dependency_part_attribute_id", null: false
+    t.string "operator", null: false
+    t.decimal "price_adjustment", precision: 10, scale: 2, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["dependency_part_attribute_id"], name: "index_price_rules_on_dependency_part_attribute_id"
+    t.index ["part_attribute_id"], name: "index_price_rules_on_part_attribute_id"
+  end
+
   add_foreign_key "incompatibility_rules", "part_attributes", column: "attribute_a_id"
   add_foreign_key "incompatibility_rules", "part_attributes", column: "attribute_b_id"
   add_foreign_key "item_parts", "item_parts", column: "parent_id"
   add_foreign_key "item_parts", "items"
   add_foreign_key "part_attributes", "item_parts"
+  add_foreign_key "price_rules", "part_attributes"
+  add_foreign_key "price_rules", "part_attributes", column: "dependency_part_attribute_id"
 end

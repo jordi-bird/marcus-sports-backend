@@ -6,6 +6,7 @@ module Types
       field :stock, Boolean, null: true
 
       field :incompatible_attributes, [Types::PartAttributeType], null: false
+      field :price_rules, [Types::PriceRuleType], null: true
       
       
       def incompatible_attributes
@@ -16,6 +17,10 @@ module Types
             # Retornem els atributs incompatibles en funció de l'atribut actual
             rule.attribute_a_id == object.id ? rule.attribute_b : rule.attribute_a
           }
+      end
+
+      def price_rules
+        object.price_rules
       end
     end
   end
