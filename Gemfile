@@ -50,3 +50,4 @@ gem "rspec-rails", "~> 8.0"
 gem 'rack-cors'
 
 gem "graphql", "~> 2.5"
+gem "graphiql-rails", group: :development
