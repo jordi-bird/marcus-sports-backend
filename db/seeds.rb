@@ -1,4 +1,5 @@
 # Esborra dades prèvies
+Rule.delete_all
 ItemPartAttributeOption.delete_all
 ItemPartAttribute.delete_all
 ItemPart.delete_all
@@ -54,3 +55,63 @@ chain_type_attr.item_part_attribute_options.create!([
 
 puts "✅ Seed completat correctament!"
 puts "Total d'articles: #{Item.count}"
+
+
+# === REGLAMENT ===
+puts "Creant regles..."
+
+# Agafa opcions específiques
+mountain_wheels = ItemPartAttributeOption.find_by!(name: "Mountain wheels")
+fat_bike_wheels = ItemPartAttributeOption.find_by!(name: "Fat bike wheels")
+red_rim = ItemPartAttributeOption.find_by!(name: "Red")
+full_suspension = ItemPartAttributeOption.find_by!(name: "Full-suspension")
+diamond_frame = ItemPartAttributeOption.find_by!(name: "Diamond")
+eight_speed_chain = ItemPartAttributeOption.find_by!(name: "8-speed chain")
+matte_finish = ItemPartAttributeOption.find_by!(name: "Matte")
+
+# 1. Mountain wheels només compatible amb Full-suspension
+Rule.create!(
+  source_option: mountain_wheels,
+  target_option: full_suspension,
+  rule_type: "compatibility",
+  reciprocal: true
+)
+
+# 1. Mountain wheels només compatible amb Full-suspension
+Rule.create!(
+  source_option: diamond_frame,
+  target_option: matte_finish,
+  rule_type: "incompatibility",
+  reciprocal: true
+)
+
+
+# 2. Fat bike wheels incompatible amb Red rim
+Rule.create!(
+  source_option: fat_bike_wheels,
+  target_option: red_rim,
+  rule_type: "incompatibility",
+  reciprocal: true
+)
+
+# 3. Si esculls 8-speed chain, Diamond frame té un suplement de 50
+Rule.create!(
+  source_option: eight_speed_chain,
+  target_option: diamond_frame,
+  rule_type: "price_modifier",
+  operation: "add",
+  value: 50,
+  reciprocal: false
+)
+
+# 4. Si esculls Matte finish, Fat bike wheels es multiplica ×1.1
+Rule.create!(
+  source_option: matte_finish,
+  target_option: fat_bike_wheels,
+  rule_type: "price_modifier",
+  operation: "multiply",
+  value: 1.1,
+  reciprocal: false
+)
+
+puts "✅ Regles creades: #{Rule.count}"

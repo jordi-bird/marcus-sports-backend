@@ -7,5 +7,6 @@ module Types
   
       field :item_part_attributes, [Types::ItemPartAttributeType], null: false
       field :children, [Types::ItemPartType], null: true
+      field :rules, [Types::RuleType], null: true, description: "Les regles associades a aquesta opció de part"
     end
   end

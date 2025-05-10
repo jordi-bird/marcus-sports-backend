@@ -1,5 +1,16 @@
 class ItemPartAttributeOption < ApplicationRecord
   belongs_to :item_part_attribute
-  #has_many :incompatible_options_links, class_name: 'IncompatibleOption', foreign_key: 'option_id'
-  #has_many :incompatible_with, through: :incompatible_options_links, source: :incompatible_with
+
+  # Relacions amb les regles
+  has_many :source_rules, class_name: 'Rule', foreign_key: 'source_option_id'
+  has_many :target_rules, class_name: 'Rule', foreign_key: 'target_option_id'
+
+  # Validacions
+  validates :name, presence: true
+  validates :price, numericality: { greater_than_or_equal_to: 0 }
+
+  # Mètode per obtenir totes les regles relacionades amb aquesta opció
+  def rules
+    Rule.where("source_option_id = ? OR target_option_id = ?", self.id, self.id)
+  end
 end

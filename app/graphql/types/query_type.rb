@@ -23,6 +23,9 @@ module Types
 
     field :items, resolver: Resolvers::ItemsResolver
     field :item, resolver: Resolvers::ItemResolver
+    field :item_part, resolver: Resolvers::ItemPartResolver
+    field :item_part_attribute, resolver: Resolvers::ItemPartAttributeResolver
+    field :item_part_attribute_option, resolver: Resolvers::ItemPartAttributeOptionResolver
 
   end
 end
