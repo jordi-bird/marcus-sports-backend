@@ -66,15 +66,23 @@ fat_bike_wheels = ItemPartAttributeOption.find_by!(name: "Fat bike wheels")
 red_rim = ItemPartAttributeOption.find_by!(name: "Red")
 full_suspension = ItemPartAttributeOption.find_by!(name: "Full-suspension")
 diamond_frame = ItemPartAttributeOption.find_by!(name: "Diamond")
+single_speed_chain = ItemPartAttributeOption.find_by!(name: "Single-speed chain")
 eight_speed_chain = ItemPartAttributeOption.find_by!(name: "8-speed chain")
 matte_finish = ItemPartAttributeOption.find_by!(name: "Matte")
 
 # 1. Mountain wheels només compatible amb Full-suspension
 Rule.create!(
-  source_option: mountain_wheels,
-  target_option: full_suspension,
+  source_option: full_suspension,
+  target_option: mountain_wheels,
   rule_type: "compatibility",
-  reciprocal: true
+  reciprocal: false
+)
+
+Rule.create!(
+  source_option: diamond_frame,
+  target_option: single_speed_chain,
+  rule_type: "compatibility",
+  reciprocal: false
 )
 
 # 1. Mountain wheels només compatible amb Full-suspension
@@ -96,8 +104,8 @@ Rule.create!(
 
 # 3. Si esculls 8-speed chain, Diamond frame té un suplement de 50
 Rule.create!(
-  source_option: eight_speed_chain,
-  target_option: diamond_frame,
+  source_option: diamond_frame,
+  target_option: eight_speed_chain,
   rule_type: "price_modifier",
   operation: "add",
   value: 50,
