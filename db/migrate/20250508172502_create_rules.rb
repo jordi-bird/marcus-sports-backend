@@ -4,7 +4,7 @@ class CreateRules < ActiveRecord::Migration[8.0]
       # Enllaços opcionals segons el tipus de regla
       t.references :source_option, null: false, foreign_key: { to_table: :item_part_attribute_options }
       t.references :target_option, foreign_key: { to_table: :item_part_attribute_options }
-      t.references :target_part, foreign_key: { to_table: :item_parts }
+      #t.references :target_part, foreign_key: { to_table: :item_parts }
 
       # Tipus de regla: compatibility, incompatibility, price_modifier, etc.
       t.string :rule_type, null: false

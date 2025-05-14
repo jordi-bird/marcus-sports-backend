@@ -1,7 +1,7 @@
 class Rule < ApplicationRecord
     belongs_to :source_option, class_name: 'ItemPartAttributeOption'
     belongs_to :target_option, class_name: 'ItemPartAttributeOption', optional: true
-    belongs_to :target_part, class_name: 'ItemPart', optional: true
+    #belongs_to :target_part, class_name: 'ItemPart', optional: true
   
     # Enum per al tipus de regla amb valor per defecte
     enum :rule_type, {
@@ -20,7 +20,8 @@ class Rule < ApplicationRecord
     validates :rule_type, presence: true
     validates :value, presence: true, if: :price_modifier?
     validates :operation, presence: true, if: :price_modifier?
-  
+    validates :value, numericality: { greater_than: 0 }, if: -> { price_modifier? && operation_multiply? }
+
     # Validació personalitzada per assegurar la presència del target
     validate :target_presence_for_relevance
   
@@ -28,8 +29,9 @@ class Rule < ApplicationRecord
   
     def target_presence_for_relevance
       if compatibility? || incompatibility?
-        if target_option.nil? && target_part.nil?
-          errors.add(:base, "Compatibility/Incompatibility rules require a target_option or target_part")
+        #if target_option.nil? && target_part.nil?
+        if target_option.nil? 
+          errors.add(:base, "Compatibility/Incompatibility rules require a target_option")
         end
       elsif price_modifier?
         if target_option.nil?

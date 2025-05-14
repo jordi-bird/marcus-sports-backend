@@ -14,9 +14,9 @@ module Resolvers
                         .or(rules.where(target_option_id: item_part_attribute_option_id))
         end
   
-        if item_part_option_id
-          rules = rules.where(target_part_id: item_part_option_id)
-        end
+        # if item_part_option_id
+        #   rules = rules.where(target_part_id: item_part_option_id)
+        # end
   
         rules
       end

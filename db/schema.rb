@@ -50,7 +50,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_172502) do
   create_table "rules", force: :cascade do |t|
     t.integer "source_option_id", null: false
     t.integer "target_option_id"
-    t.integer "target_part_id"
     t.string "rule_type", null: false
     t.decimal "value", precision: 10, scale: 2
     t.string "operation"
@@ -59,7 +58,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_172502) do
     t.datetime "updated_at", null: false
     t.index ["source_option_id"], name: "index_rules_on_source_option_id"
     t.index ["target_option_id"], name: "index_rules_on_target_option_id"
-    t.index ["target_part_id"], name: "index_rules_on_target_part_id"
   end
 
   add_foreign_key "item_part_attribute_options", "item_part_attributes"
@@ -68,5 +66,4 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_172502) do
   add_foreign_key "item_parts", "items"
   add_foreign_key "rules", "item_part_attribute_options", column: "source_option_id"
   add_foreign_key "rules", "item_part_attribute_options", column: "target_option_id"
-  add_foreign_key "rules", "item_parts", column: "target_part_id"
 end

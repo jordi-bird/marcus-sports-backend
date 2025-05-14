@@ -7,7 +7,7 @@ module Types
       field :operation, String, null: true
       field :source_option, Types::ItemPartAttributeOptionType, null: true
       field :target_option, Types::ItemPartAttributeOptionType, null: true
-      field :target_part, Types::ItemPartType, null: true
+      #field :target_part, Types::ItemPartType, null: true
       field :reciprocal, Boolean, null: false
       # IDs directes (per optimització o evitar nested queries)
     end
