@@ -11,5 +11,9 @@ module Types
     field :create_item_part_attribute, mutation: Mutations::CreateItemPartAttribute
     field :update_item_part_attribute, mutation: Mutations::UpdateItemPartAttribute
     field :delete_item_part_attribute, mutation: Mutations::DeleteItemPartAttribute
+    field :create_item_part_attribute_option, mutation: Mutations::CreateItemPartAttributeOption
+    field :update_item_part_attribute_option, mutation: Mutations::UpdateItemPartAttributeOption
+    field :delete_item_part_attribute_option, mutation: Mutations::DeleteItemPartAttributeOption
+
   end
 end

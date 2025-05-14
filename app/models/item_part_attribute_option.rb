@@ -2,7 +2,7 @@ class ItemPartAttributeOption < ApplicationRecord
   belongs_to :item_part_attribute
 
   # Relacions amb les regles
-  has_many :source_rules, class_name: 'Rule', foreign_key: 'source_option_id'
+  has_many :source_rules, class_name: 'Rule', foreign_key: 'source_option_id', dependent: :destroy
   has_many :target_rules, class_name: 'Rule', foreign_key: 'target_option_id'
 
   # Validacions
