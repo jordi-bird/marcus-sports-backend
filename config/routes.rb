@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   end
 
   post "/graphql", to: "graphql#execute"
+
+  match "/graphql", via: [:options], to: proc { [204, {}, ['']] }
 end

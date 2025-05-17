@@ -1,11 +1,11 @@
 source "https://rubygems.org"
 
-ruby "3.2.2" # (Afegit si tens una versió concreta de Ruby. Canvia-la si cal.)
+ruby "3.2.2" 
 
 # --- Rails i base ---
 gem "rails", "~> 8.0.2"
 gem "puma", ">= 5.0"
-gem "sqlite3", ">= 2.1"
+gem 'pg'
 gem "bootsnap", require: false
 
 # --- Async backends (Rails 8) ---
@@ -28,6 +28,7 @@ gem "tzinfo-data", platforms: %i[windows jruby]
 # --- Desenvolupament i Test ---
 group :development, :test do
   gem "debug", platforms: %i[mri windows], require: "debug/prelude"
+  gem 'dotenv-rails'
   gem "rspec-rails", "~> 8.0"
   gem "factory_bot_rails"
   gem "faker"

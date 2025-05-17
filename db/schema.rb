@@ -11,8 +11,11 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.0].define(version: 2025_05_08_172502) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "item_part_attribute_options", force: :cascade do |t|
-    t.integer "item_part_attribute_id", null: false
+    t.bigint "item_part_attribute_id", null: false
     t.string "name"
     t.decimal "price"
     t.integer "stock"
@@ -22,7 +25,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_172502) do
   end
 
   create_table "item_part_attributes", force: :cascade do |t|
-    t.integer "item_part_id", null: false
+    t.bigint "item_part_id", null: false
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -30,10 +33,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_172502) do
   end
 
   create_table "item_parts", force: :cascade do |t|
-    t.integer "item_id", null: false
+    t.bigint "item_id", null: false
     t.string "name"
     t.text "description"
-    t.integer "parent_id"
+    t.bigint "parent_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["item_id"], name: "index_item_parts_on_item_id"
@@ -48,8 +51,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_08_172502) do
   end
 
   create_table "rules", force: :cascade do |t|
-    t.integer "source_option_id", null: false
-    t.integer "target_option_id"
+    t.bigint "source_option_id", null: false
+    t.bigint "target_option_id"
     t.string "rule_type", null: false
     t.decimal "value", precision: 10, scale: 2
     t.string "operation"
