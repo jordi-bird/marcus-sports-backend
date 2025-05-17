@@ -1,7 +1,6 @@
 class Rule < ApplicationRecord
     belongs_to :source_option, class_name: 'ItemPartAttributeOption'
-    belongs_to :target_option, class_name: 'ItemPartAttributeOption', optional: true
-    #belongs_to :target_part, class_name: 'ItemPart', optional: true
+    belongs_to :target_option, class_name: 'ItemPartAttributeOption'
   
     # Enum per al tipus de regla amb valor per defecte
     enum :rule_type, {

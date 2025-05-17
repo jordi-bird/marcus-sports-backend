@@ -14,7 +14,7 @@ module Mutations
           stock: input.stock
         )
   
-        # Aquí hauries de crear les rules si input.rules és present
+        # Creació de les rules
         if input.rules.present?
           input.rules.each do |rule_input|
             option.rules.build(

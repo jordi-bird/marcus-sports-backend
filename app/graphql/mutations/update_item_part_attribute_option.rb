@@ -2,7 +2,6 @@
 module Mutations
     class UpdateItemPartAttributeOption < BaseMutation
       argument :input, Types::Inputs::UpdateItemPartAttributeOptionInput, required: true
-
   
       field :item_part_attribute_option, Types::ItemPartAttributeOptionType, null: true
       field :errors, [String], null: false
@@ -16,7 +15,7 @@ module Mutations
         option.price = input.price if input.price
         option.stock = input.stock if input.stock
   
-        # 💥 Gestió de les regles (simple, esborra i recrea)
+        # Gestió de les regles (esborra i recrea)
         if input.rules
             option.source_rules.destroy_all
 
